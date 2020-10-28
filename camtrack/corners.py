@@ -38,7 +38,7 @@ def _build_impl(frame_sequence: pims.FramesSequence,
                 builder: _CornerStorageBuilder) -> None:
     height, width = frame_sequence.frame_shape[:2]
     max_levels = min(np.log2(height), np.log2(width)).astype(np.int8)
-    MAX_CORNERS = 1000
+    MAX_CORNERS = 2000
     WINDOW_SIZE = (15, 15)
     MIN_DIST = 10
     BLOCK_SIZE = 3
@@ -89,6 +89,14 @@ def _build_impl(frame_sequence: pims.FramesSequence,
             )
 
         n = corner_szs.size
+
+        if n >= MAX_CORNERS:
+            prev_pyramid = pyramid
+            prev_levels = levels
+            builder.set_corners_at_frame(frame, FrameCorners(
+            corner_ids, corner_pts, corner_szs))
+            continue
+
         new_pts = []
         new_ids = []
         new_szs = []
