@@ -38,9 +38,9 @@ def _build_impl(frame_sequence: pims.FramesSequence,
                 builder: _CornerStorageBuilder) -> None:
     height, width = frame_sequence.frame_shape[:2]
     max_levels = min(np.log2(height), np.log2(width)).astype(np.int8)
-    MAX_CORNERS = 2000
+    MAX_CORNERS = 2500
     WINDOW_SIZE = (15, 15)
-    MIN_DIST = 10
+    MIN_DIST = 8
     BLOCK_SIZE = 3
     QUALITY_LEVEL = 0.075
 
