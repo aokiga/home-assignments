@@ -34,7 +34,7 @@ DATASET_CONFIG_SCHEMA = Schema({
             'camera': str,
             'ground_truth': str,
             'rgb': str,
-            Optional('initial_frames'): Any(_check_frame_pair, Default(None))
+            'initial_frames': Any(_check_frame_pair, Default(None))
         }
     }
 })
@@ -176,6 +176,7 @@ def _do_tracking(test_info, ground_truth, corner_storage, test_dir):
         )
     except Exception as err:  # pylint:disable=broad-except
         click.echo('  scene solving failed: {}'.format(err))
+        #raise err
         return None, None
     else:
         click.echo('  scene solving succeeded')
