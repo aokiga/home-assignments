@@ -205,7 +205,7 @@ def track_and_calc_colors(camera_parameters: CameraParameters,
         frame_1_pose, frame_2_pose = view_mat3x4_to_pose(eye3x4()), None
         best_result = 0
         for i in range(frame_count):
-            for j in range(i + 5, min(i + 45, frame_count)):
+            for j in range(i + 10   , min(i + 45, frame_count)):
                 pose, result = get_pair_score(corner_storage[i], corner_storage[j], intrinsic_mat)
                 if result > best_result:
                     frame_1, frame_2, frame_2_pose = i, j, pose
